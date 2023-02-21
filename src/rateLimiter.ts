@@ -25,7 +25,6 @@ export function rateLimiter(opts?: RateLimiterOptions){
     await redis.zremrangebyscore(key, 0, intervalAgo)
 
     const count = await redis.zcard(key)
-    const limit = 10
 
     console.debug(`Found ${count} requests in last ${interval} seconds`)
 
