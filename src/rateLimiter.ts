@@ -26,7 +26,7 @@ export function rateLimiter(opts?: RateLimiterOptions){
 
     const count = await redis.zcard(key)
 
-    console.debug(`Found ${count} requests in last ${interval} seconds`)
+    console.debug(`Found ${count} requests in last ${interval} milliseconds`)
 
     if (count > limit){
       console.warn('Rate limit exceeded')
