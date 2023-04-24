@@ -1,14 +1,17 @@
 # What is this?
-A _sliding window rate limiter_ implemented as an express middleware. The limiter uses a Redis sorted set and works as follows:
+A _sliding window rate limiter_ implemented as an express middleware. 
+
+> **Sliding window rate limiter**: a rate limiting technique that uses a moving time window to track the number of requests made within a specific time period. The window "slides" forward with each new request, and requests that exceed the limit within the window are rejected.
+
+The limiter uses a Redis sorted set and works as follows:
   - Writes a timestamp to a sorted set that is namespaced to the request IP
   - Removes all records from this set that are older than a given interval (1 minute by default)
   - Counts the records in the set
     - If the count is above the given limit (100 by default) then it returns a `429 Too Many Requests` response
     - Otherwise the request continues
 
-I created this repository because I wanted to gain a better understanding of rate limiting and implement a technique from scratch. Although there are several npm packages available for rate limiting, implementating one yourself is relatively straightforward and helps minimize dependencies.
+I created this repository because I wanted to gain a better understanding of rate limiting techniques and build something from scratch. Although there are several npm packages available for rate limiting, this particular technique is relatively straightforward and implementing it yourself can help minimize dependencies.
 
-> **Sliding window rate limiter**: a rate limiting technique that uses a moving time window to track the number of requests made within a specific time period. The window "slides" forward with each new request, and requests that exceed the limit within the window are rejected.
 # Development
 Clone the repo:
 
